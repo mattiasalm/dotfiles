@@ -69,7 +69,7 @@ printTitle() {
 
 # Print instructions and side borders
 printInstructions() {
-    echo -n " ${BAR} ${I}SPACE = select, ENTER = proceed, Q = quit${R}${D}"
+    echo -n " ${BAR} ${I}[SPACE] = select, [ENTER] = proceed, [Q] = quit${R}${D}"
     local i=0; while (( i < ( WIDTH - 45 ) )); do echo -n " "; ((i++)); done
     echo -e "${BAR}\r"
 }

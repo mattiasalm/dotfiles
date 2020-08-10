@@ -48,12 +48,13 @@ if hash mas 2>/dev/null; then
 
     # Check login
     echo -e "\n"
-    printMessage "Check that you are signed in in Mac App Store and then press ENTER"
+    printMessage "Check that you are signed in in Mac App Store and then press [ENTER]"
     printMessage "Opening Mac App Store..."
     sleep 2
     open -a "App Store"
+    printMessage "Waiting for [ENTER]..."
     source "$DIR/util/wait-for-enter.sh"
-    clearLines 4
+    clearLines 5
 
     # Do installations
     _APP_COUNT=1

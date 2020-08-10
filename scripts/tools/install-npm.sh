@@ -33,12 +33,12 @@ if test -e $HOME/.zshrc; then
     NVM_DIR=$HOME/.nvm
     local NVM_SOURCING="export NVM_DIR=\"$NVM_DIR\"\ntest -e \"$NVM_DIR/bash_completion\" && source \"$NVM_DIR/bash_completion\"\ntest -e \"$NVM_DIR/nvm.sh\" && source \"$NVM_DIR/nvm.sh\""
     if grep -o 'export NVM_DIR=' $HOME/.zshrc &> /dev/null; then
-        printNoteSuccess "Sourcing of nvm already added to .zshrc"
+        printNoteSuccess "Loading of nvm already added to .zshrc"
     else
         if echo $NVM_SOURCING>>$HOME/.zshrc; then
-            printNoteSuccess "Added source of nvm to .zshrc"
+            printNoteSuccess "Added loading of nvm to .zshrc"
         else
-            printNoteError "Failed to add source of nvm to .zshrc"
+            printNoteError "Failed to add loading of nvm to .zshrc"
             exit 1
         fi
     fi

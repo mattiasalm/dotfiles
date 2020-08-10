@@ -5,7 +5,7 @@ if [ -e "$HOME/.hyper.js" ]; then
 
     # Font size
     printInstalling "Font size"
-    sed -i "" 's/fontSize.*,/fontSize: 14,/g' $HOME/.hyper.js
+    sed -i "" 's/fontSize.*,/fontSize: 16,/g' $HOME/.hyper.js
     printNoteSuccess "Done"
 
 else
