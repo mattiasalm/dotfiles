@@ -34,14 +34,14 @@ APPS_NAME+="WiFi Signal"
 APPS_ID+="1157906903"
 APPS_NAME+="iOrdning"
 
-APPS_ID+="409183694"
-APPS_NAME+="Keynote"
+# APPS_ID+="409183694"
+# APPS_NAME+="Keynote"
 
-APPS_ID+="409201541"
-APPS_NAME+="Pages"
+# APPS_ID+="409201541"
+# APPS_NAME+="Pages"
 
-APPS_ID+="409203825"
-APPS_NAME+="Numbers"
+# APPS_ID+="409203825"
+# APPS_NAME+="Numbers"
 
 printHeading "Mac App Store apps"
 if hash mas 2>/dev/null; then
