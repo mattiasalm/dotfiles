@@ -18,17 +18,17 @@ declare -a ARRAY_PAIR_LEFT=()
 declare -a ARRAY_PAIR_RIGHT=()
 
 # TOOLS & APPS
-ARRAY_PAIR_LEFT+="Install Mac App Store CLI"
-ARRAY_PAIR_RIGHT+="scripts/tools/install-mas.sh"
-
-ARRAY_PAIR_LEFT+="Install Mac App Store apps"
-ARRAY_PAIR_RIGHT+="scripts/tools/install-mas-apps.sh"
-
 ARRAY_PAIR_LEFT+="Install Homebrew"
 ARRAY_PAIR_RIGHT+="scripts/tools/install-homebrew.sh"
 
 ARRAY_PAIR_LEFT+="Install Homebrew packages"
 ARRAY_PAIR_RIGHT+="scripts/tools/install-brewfile.sh"
+
+ARRAY_PAIR_LEFT+="Install Mac App Store CLI"
+ARRAY_PAIR_RIGHT+="scripts/tools/install-mas.sh"
+
+ARRAY_PAIR_LEFT+="Install Mac App Store apps"
+ARRAY_PAIR_RIGHT+="scripts/tools/install-mas-apps.sh"
 
 ARRAY_PAIR_LEFT+="Install zsh utils"
 ARRAY_PAIR_RIGHT+="scripts/tools/install-zsh.sh"
