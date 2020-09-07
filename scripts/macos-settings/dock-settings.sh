@@ -33,6 +33,9 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock single-app -bool false
 printTask "Disable run single app at once" $?
 
+defaults write com.apple.universalaccess reduceTransparency -bool true
+printTask "Disable menu bar transparency"
+
 ## Hot corners
 ## Possible values (corner)
 ##  0: no-op

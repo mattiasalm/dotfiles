@@ -9,9 +9,9 @@ if hash brew 2>/dev/null; then
 else
     local url=https://raw.githubusercontent.com/Homebrew/install/master/install.sh
     if /bin/bash -c "$(curl -fsSL ${url})"; then
-        printNoteSuccess "Installation succeeded"
+        printNoteSuccess "Done"
     else
-        printNoteError "Installation failed"
+        printNoteError "Failed"
         exit 1
     fi
 fi

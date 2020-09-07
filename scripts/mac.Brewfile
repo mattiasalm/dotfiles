@@ -1,4 +1,8 @@
 
+# brews
+brew "n"
+brew "mackup"
+
 # taps
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -16,7 +20,7 @@ cask "fork"
 cask "forklift"
 cask "google-chrome"
 cask "hyper"
-# cask "microsoft-office"
+cask "microsoft-office"
 cask "postman"
 cask "spotify"
 cask "slack"

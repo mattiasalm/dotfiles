@@ -18,3 +18,7 @@ printTask "Disable Resume system-wide" $?
 
 sudo systemsetup -setrestartfreeze on
 printTask "Restart automatically if the computer freezes" $?
+
+
+sudo pmset -a autorestart 1
+printTask "Auto restart on power loss"

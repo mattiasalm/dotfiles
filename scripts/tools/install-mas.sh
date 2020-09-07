@@ -7,10 +7,9 @@ if hash brew 2>/dev/null; then
         printNoteSuccess "Mac App Store CLI already installed"
     else
         if brew install mas &> /dev/null; then
-            printNoteSuccess "Mac App Store CLI successfully installed"
+            printNoteSuccess "Done"
         else
-            printNoteError "Mac App Store CLI installation failed"
-            exit 1
+            printNoteError "Failed"
         fi
     fi
 else

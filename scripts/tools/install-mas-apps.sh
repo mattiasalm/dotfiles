@@ -31,8 +31,8 @@ APPS_NAME+="Ethernet Status"
 APPS_ID+="525912054"
 APPS_NAME+="WiFi Signal"
 
-APPS_ID+="1157906903"
-APPS_NAME+="iOrdning"
+# APPS_ID+="1157906903"
+# APPS_NAME+="iOrdning"
 
 # APPS_ID+="409183694"
 # APPS_NAME+="Keynote"
@@ -65,9 +65,9 @@ if hash mas 2>/dev/null; then
         
         printInstalling "Installing ${_NAME}"
         if installOnMAS $_ID; then
-            printNoteSuccess "Successfully installed"
+            printNoteSuccess "Done"
         else
-            printNoteError "Installation failed"
+            printNoteError "Failed"
         fi
         (( _APP_COUNT++ ))
     done
