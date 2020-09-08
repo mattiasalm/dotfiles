@@ -8,6 +8,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 printTask "Disable Photos from autostarting" $?
 
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+sudo spctl --master-disable
 printTask "Disable the 'Are you sure you want to open this application?' dialog" $?
 
 defaults write com.apple.CrashReporter DialogType -string "none"
