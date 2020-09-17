@@ -12,6 +12,7 @@ tap "homebrew/cask-fonts"
 # casks
 cask "1password"
 cask "adobe-creative-cloud"
+cask "brackets"
 cask "alfred"
 cask "carbon-copy-cloner"
 cask "dropbox"
