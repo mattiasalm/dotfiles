@@ -2,6 +2,7 @@
 # brews
 brew "n"
 brew "mackup"
+brew "exiftool"
 
 # taps
 tap "homebrew/bundle"
