@@ -1,0 +1,26 @@
+#!/bin/zsh -e
+
+escape='\e['
+reset=0m
+red=31m
+green=32m
+yellow=33m
+blue=34m
+magenta=35m
+cyan=36m
+
+_COLOR=$1
+_TEXT=${*:2}
+
+case $_COLOR in
+	"blue" | "red" | "green" | "yellow" | "magenta" | "cyan" | "aqua" )
+		printf '%b\n' $escape${(P)_COLOR}$_TEXT$escape$reset
+		;;
+	*)
+		if [[ $_TEXT == '' ]]; then
+			echo $_COLOR
+		else
+			echo $_TEXT
+		fi
+		;;
+esac

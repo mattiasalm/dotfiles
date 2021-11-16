@@ -1,0 +1,34 @@
+#!/bin/zsh -e
+
+# Include tools as binary functions
+PATH=$PATH:$DOTFILES_PATH/tools
+
+_BIN_NAME=$(basename "$0")
+_COMMAND=$1
+
+show_help() {
+	color-print green "\nUsage of: $_BIN_NAME <command>\n\n"
+	color-print green "Commands:"
+	color-print green "  help\t\t\t\t- Show this help message"
+	color-print green "  macos-settings\t\t- Applies macOS settings"
+}
+
+command_macos-settings() {
+	. "${DOTFILES_PATH}/macos/run.sh"
+}
+
+case $_COMMAND in
+	"" | "--help" | "-h" | "help")
+		show_help
+		;;
+
+	*)
+		shift
+		if type command_${_COMMAND} &> /dev/null; then
+			command_${_COMMAND} $@
+		else
+			color-print red "Command \"$_COMMAND\" can not be found.\n\n"
+			show_help
+		fi
+		;;
+esac
