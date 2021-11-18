@@ -12,4 +12,4 @@ sudo softwareupdate --install --all
 
 # Install Xcode (includes other things such as git)
 color-print yellow "Installing Xcode"
-xcode-select --install
+xcode-select --install || echo ""
