@@ -7,7 +7,7 @@ _BIN_NAME=$(basename $0)
 _COMMAND=$1
 
 show_help() {
-	color-print green "\nUsage of: $_BIN_NAME <command>\n\n"
+	color-print green "\nUsage: $_BIN_NAME <command>\n\n"
 	color-print green "Commands:"
 	color-print green "  help\t\t\t\t- Show this help message"
 	color-print green "  all\t\t\t\t- Do all installation steps"

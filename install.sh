@@ -14,7 +14,7 @@ fi
 # Clean .dotfiles path and copy files there
 rm -rf $_DOTFILES_PATH
 mkdir -p $_DOTFILES_PATH
-cp -a ^install.sh $_DOTFILES_PATH
+cp -a ^*install.sh $_DOTFILES_PATH
 
 # Make all files in .dotfiles binary path executable
 _BINARY_FILES=($_DOTFILES_PATH/bin/*)
@@ -36,3 +36,7 @@ replace-in-file "export DOTFILES_PATH.*$" $_NEW_DOTFILES_EXPORT $_SHELL_RC_FILE
 
 # Execute shell rc file
 . $_SHELL_RC_FILE
+
+color-print green "\ndotfiles installation successful!\n"
+
+dotfiles
