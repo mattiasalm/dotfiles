@@ -7,15 +7,15 @@ _BIN_NAME=$(basename $0)
 _COMMAND=$1
 
 show_help() {
-	color-print green "\nUsage: $_BIN_NAME <command>\n\n"
+	color-print green "\nUsage: $_BIN_NAME <command>\n"
 	color-print green "Commands:"
-	color-print green "  help\t\t\t\t- Show this help message"
-	color-print green "  all\t\t\t\t- Do all installation steps"
-	color-print green "  macos-settings\t\t- Applies macOS settings"
-	color-print green "  prepare\t\t\t- Prepare system for further installation"
-	color-print green "  managers\t\t\t- Install application managers"
-	color-print green "  applications\t\t\t- Install applications"
-	color-print green "  update\t\t\t- Update system, managers and applications"
+	color-print green "  help\t\t\t- Show this help message"
+	color-print green "  all\t\t\t- Do all installation steps"
+	color-print green "  macos-settings\t- Applies macOS settings"
+	color-print green "  prepare\t\t- Prepare system for further installation"
+	color-print green "  managers\t\t- Install application managers"
+	color-print green "  applications\t\t- Install applications"
+	color-print green "  update\t\t- Update system, managers and applications"
 }
 
 case $_COMMAND in
