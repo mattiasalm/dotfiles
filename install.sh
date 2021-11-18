@@ -37,6 +37,8 @@ replace-in-file "export DOTFILES_PATH.*$" $_NEW_DOTFILES_EXPORT $_SHELL_RC_FILE
 # Execute shell rc file
 . $_SHELL_RC_FILE
 
+is-available dotfiles && \
 color-print green "\ndotfiles installation successful!\n"
+
 
 dotfiles

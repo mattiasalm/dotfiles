@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+_CURRENT_DIR=$PWD
 _TEMP_TARGET=$HOME/Downloads/dotfiles
 _SOURCE="https://github.com/mattiasalm/dotfiles/tarball/master"
 
@@ -12,4 +13,6 @@ if [[ ! $SHELL =~ zsh ]]; then
 	chsh -s $(which zsh)
 fi
 
-zsh $_TEMP_TARGET/install.sh
+cd $_TEMP_TARGET
+zsh install.sh
+cd $_CURRENT_DIR
