@@ -22,8 +22,8 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 defaults write com.apple.dock launchanim -bool false
 
 # Automatically hide and show the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0.2
-defaults write com.apple.dock autohide-delay -float 0.05
+defaults write com.apple.dock autohide-time-modifier -float 0.1
+defaults write com.apple.dock autohide-delay -float 0.03
 defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent

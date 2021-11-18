@@ -1,0 +1,14 @@
+#!/bin/zsh -e
+
+_SEARCH_REGEX=$1
+_REPLACE=$2
+_FILE=$3
+
+# Retrieve the reala path of the supplied file
+_REAL_FILE=$(. read-symlink $_FILE)
+
+if [ -f $_REAL_FILE ] && grep -q $_SEARCH_REGEX $_REAL_FILE; then
+	sed -i -- "s|$_SEARCH_REGEX|$_REPLACE|g" $_REAL_FILE
+else
+	echo "\n$_REPLACE" >> $_REAL_FILE
+fi

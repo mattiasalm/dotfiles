@@ -1,0 +1,9 @@
+# taps
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "romkatv/powerlevel10k"
+
+# brews
+brew "mackup"
+brew "exiftool"
