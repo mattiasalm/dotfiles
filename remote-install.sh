@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-_CURRENT_DIR=$PWD
 _TEMP_TARGET=$HOME/Downloads/dotfiles
 _SOURCE="https://github.com/mattiasalm/dotfiles/tarball/master"
 
