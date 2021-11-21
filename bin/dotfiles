@@ -11,10 +11,11 @@ show_help() {
 	color-print green "Commands:"
 	color-print green "  help\t\t\t- Show this help message"
 	color-print green "  all\t\t\t- Do all installation steps"
-	color-print green "  macos-settings\t- Applies macOS settings"
 	color-print green "  prepare\t\t- Prepare system for further installation"
 	color-print green "  managers\t\t- Install application managers"
 	color-print green "  applications\t\t- Install applications"
+	color-print green "  macos-settings\t- Applies macOS settings"
+	color-print green "  configuration\t\t- Add system configuration"
 	color-print green "  update\t\t- Update system, managers and applications"
 }
 
@@ -24,7 +25,7 @@ case $_COMMAND in
 		;;
 
 	"all")
-		_STEPS=("managers" "applications" "macos-settings")
+		_STEPS=("managers" "applications" "macos-settings" "configuration")
 		color-print cyan "This will run commands:"
 		for _STEP in $_STEPS; do
 			color-print cyan " - $_STEP"

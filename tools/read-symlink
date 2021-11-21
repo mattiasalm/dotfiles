@@ -6,7 +6,7 @@ _FILE_NAME=$(basename $_FILE_PATH)
 
 # Check if file is a symlink. If so, then retrieve the real file path and return
 if [ -L ${_FILE_PATH} ] && [ -e ${_FILE_PATH} ]; then
-	_RESOLVED_FILE_PATH=$(ls -na $_FILE_DIR | grep -o "$_FILE_NAME -> .*$")
+	local _RESOLVED_FILE_PATH=$(ls -na $_FILE_DIR | grep -o "$_FILE_NAME -> .*$")
 	echo ${_RESOLVED_FILE_PATH//"$_FILE_NAME -> "/""}
 else
    echo $_FILE_PATH

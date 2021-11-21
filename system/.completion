@@ -1,0 +1,3 @@
+PATH=$PATH:$DOTFILES_PATH/tools
+
+is-available npm && . <(npm completion) 
