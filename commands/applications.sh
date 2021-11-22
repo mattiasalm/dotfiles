@@ -19,5 +19,6 @@ else
 fi
 
 # Load PowerLevel10k from zshrc
+color-print yellow "Add loading of PowerLevel10k theme"
 _NEW_THEME_LOAD="source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme"
 replace-in-file "source.*zsh-theme" $_NEW_THEME_LOAD $HOME/.zshrc

@@ -1,0 +1,3 @@
+alias la="la -la"
+alias cd..='cd ..'
+alias ..='cd ..'

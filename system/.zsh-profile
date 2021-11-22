@@ -8,7 +8,7 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-_DOTFILES=("completion")
+_DOTFILES=("completion" "alias")
 for _DOTFILE in $_DOTFILES; do
 	local _FILE=$DOTFILES_PATH/system/.$_DOTFILE
 	[ -f $_FILE ] && source $_FILE

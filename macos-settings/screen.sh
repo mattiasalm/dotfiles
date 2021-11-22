@@ -20,3 +20,9 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# Turn off screen after 15 minutes (battery)
+sudo pmset -b displaysleep 15
+
+# Turn off screen after 15 minutes (charger)
+sudo pmset -c displaysleep 15

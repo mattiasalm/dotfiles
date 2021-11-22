@@ -1,14 +1,6 @@
 #!/bin/zsh -e
 
-COMPUTER_NAME="Mattias Alm"
-
 ## General UI/UX
-
-# Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "$COMPUTER_NAME"
-sudo scutil --set HostName "$COMPUTER_NAME"
-# sudo scutil --set LocalHostName "$COMPUTER_NAME"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$COMPUTER_NAME"
 
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en" "sv"
@@ -18,12 +10,6 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone (see `sudo systemsetup -listtimezones` for other values)
 # sudo systemsetup -settimezone "Europe/Stockholm" > /dev/null
-
-# Set standby delay to 24 hours (default is 1 hour)
-sudo pmset -a standbydelay 86400
-
-# Disable Sudden Motion Sensor
-sudo pmset -a sms 0
 
 # Disable photos from autostarting
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
@@ -36,9 +22,6 @@ defaults write com.apple.sound.beep.feedback -bool false
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
-
-# Disable hibernate mode
-sudo pmset -a hibernatemode 0
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -83,3 +66,21 @@ defaults write com.apple.CrashReporter DialogType -string "none"
 
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+# Disable Siri
+defaults write com.apple.assistant.support.plist "Assistant Enabled" -bool false
+
+# Hide Siri menu icon
+defaults write com.apple.Siri StatusMenuVisible -bool false
+
+# Show network icon in menu bar
+defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist WiFi -int 18
+
+# Show bluetooth icon in menu bar
+defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Bluetooth -int 18
+
+# Show sound icon in menu bar
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Sound -int 18
