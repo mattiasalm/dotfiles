@@ -16,6 +16,8 @@ for _SETTINGS_FILE in $DOTFILES_PATH/macos-settings/*.sh; do
 	. $_SETTINGS_FILE
 done
 
+color-print cyan "\nSome settings may need a reboot to function properly."
+
 # Restart affected apps
 for app in "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
 	killall $app &> /dev/null

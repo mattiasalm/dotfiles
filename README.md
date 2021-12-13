@@ -40,7 +40,7 @@ Usage: dotfiles <command>
 
 Commands:
   help                  - Show this help message
-  all                   - Do all installation steps
+  all                   - Run all installation steps
   prepare               - Prepare system for further installation
   managers              - Install application managers
   applications          - Install applications

@@ -4,7 +4,7 @@ _SEARCH_REGEX=$1
 _REPLACE=$2
 _FILE=$3
 
-# Retrieve the reala path of the supplied file
+# Retrieve the real path of the supplied file
 _REAL_FILE=$(. read-symlink $_FILE)
 
 if [ -f $_REAL_FILE ] && grep -q $_SEARCH_REGEX $_REAL_FILE; then

@@ -39,6 +39,13 @@ replace-in-file "export PATH.*$" $_NEW_PATH_EXPORT $HOME/.zshrc
 _NEW_DOTFILES_EXPORT="export DOTFILES_PATH=$_DOTFILES_PATH"
 replace-in-file "export DOTFILES_PATH.*$" $_NEW_DOTFILES_EXPORT $HOME/.zshrc
 
+# Add additional dotfiles
+_DOTFILES=("completion" "alias")
+for _DOTFILE in $_DOTFILES; do
+	local _FILE=$_DOTFILES_PATH/system/.$_DOTFILE
+	replace-in-file "source *.$_DOTFILE" "source $_FILE" $HOME/.zshrc
+done
+
 # Execute shell rc file
 . $HOME/.zshrc
 

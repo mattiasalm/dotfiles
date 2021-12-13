@@ -2,14 +2,22 @@
 
 ## General UI/UX
 
+# Set computer name
+_COMPUTERNAME="Mattias Alm's MacBook Pro"
+_LOCALHOSTNAME="mattias-alm-macbook-pro"
+sudo scutil --set ComputerName $_COMPUTERNAME
+sudo scutil --set HostName $_COMPUTERNAME
+sudo scutil --set LocalHostName $_LOCALHOSTNAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $_LOCALHOSTNAME
+
 # Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "en" "sv"
-defaults write NSGlobalDomain AppleLocale -string "en_US@currency=SEK"
+defaults write NSGlobalDomain AppleLanguages -array "sv" "en"
+defaults write NSGlobalDomain AppleLocale -string "sv_SE@currency=SEK"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone (see `sudo systemsetup -listtimezones` for other values)
-# sudo systemsetup -settimezone "Europe/Stockholm" > /dev/null
+sudo systemsetup -settimezone Europe/Stockholm &>/dev/null
 
 # Disable photos from autostarting
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
