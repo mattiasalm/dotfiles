@@ -1,4 +1,4 @@
-#!/bin/zsh -e
+#!/bin/zsh
 
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools
@@ -33,19 +33,15 @@ run_command() {
 run_all_commands() {
 	_COMMANDS=("managers" "applications" "macos-settings" "configuration")
 
-	color-print cyan "This will run commands:"
+	color-print cyan "\nThis will run commands:"
 	for _COMMAND in $_COMMANDS; do
 		color-print cyan " - $_COMMAND"
 	done
-	color-print cyan "\nContinue?"
+	color-print cyan "\n\nContinue?\n"
 
-	_ANSWER=No
-	select _RESULT in Yes No; do
-		_ANSWER=$_RESULT
-		break
-	done
-
-	if [[ $_ANSWER == "Yes" ]]; then
+	select-option $DOTFILES_PATH/.tmp No Yes
+	_SELECTED_OPTION=$(<$DOTFILES_PATH/.tmp)
+	if (( _SELECTED_OPTION == 1 )); then
 		ask-sudo
 
 		for _COMMAND in $_COMMANDS; do

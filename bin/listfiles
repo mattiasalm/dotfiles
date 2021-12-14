@@ -1,4 +1,4 @@
-#!/bin/zsh -e
+#!/bin/zsh
 
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools

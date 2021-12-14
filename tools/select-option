@@ -1,4 +1,4 @@
-#!/bin/zsh -e
+#!/bin/zsh
 
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools
@@ -16,7 +16,18 @@ TRAPINT() {
 }
 
 # Input arguments
-_OPTIONS=("$@")
+_RESULT_FILE=$1
+
+# Check if any output file has been provided
+if [ -z $_RESULT_FILE ]; then
+	color-print red "No output file provided"
+	exit 1
+fi
+
+touch $_RESULT_FILE
+
+shift
+_OPTIONS=(${@})
 _OPTIONS_LENGTH=$(expr ${#_OPTIONS[@]} - 1)
 _CURSOR=0
 
@@ -28,6 +39,8 @@ fi
 
 clear_options() {
 	tput civis
+	tput cuu1
+	tput el
 	for _ in ${_OPTIONS[@]}; do
 		tput cuu1
 		tput el
@@ -45,6 +58,7 @@ print_options() {
 		fi
 		((_COUNTER++))
 	done
+	echo
 }
 
 key_press_down() {
@@ -59,31 +73,26 @@ key_press_up() {
 	print_options
 }
 
-key_press_enter() {
-	SELECTED_OPTION=$_CURSOR
-	reset_stty
-	exit 0
-}
-
 check_key_code() {
 	if [[ $1 =~ "1b5b 4100" ]]; then
 		key_press_up
+		catch_key_press
 	elif [[ $1 =~ "1b5b 4200" ]]; then
 		key_press_down
+		catch_key_press
 	elif [[ $1 =~ "0d00 0000" ]]; then
-		key_press_enter
+		# enter
+		echo $_CURSOR > $_RESULT_FILE
 	elif [[ $1 =~ "1b00 0000" ]]; then
-		reset_stty
+		# esc
 		exit 1
 	elif [[ $1 =~ "5100 0000" ]]; then
-		reset_stty
+		# Q
 		exit 1
 	elif [[ $1 =~ "7100 0000" ]]; then
-		reset_stty
+	 	# q
 		exit 1
 	fi
-
-	catch_key_press
 }
 
 # Catch key press action and convert to 
