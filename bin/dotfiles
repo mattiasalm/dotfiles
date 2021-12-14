@@ -4,7 +4,6 @@
 PATH=$PATH:$DOTFILES_PATH/tools
 
 _BIN_NAME=$(basename $0)
-_COMMAND=$1
 
 show_help() {
 	color-print green "\nUsage: $_BIN_NAME <command>\n"
@@ -19,43 +18,52 @@ show_help() {
 	color-print green "  update\t\t- Update system, managers and applications"
 }
 
-case $_COMMAND in
+run_command() {
+	_COMMAND=$1
+
+	if [ -f $DOTFILES_PATH/commands/$_COMMAND.sh ]; then
+		color-print cyan "\nRuns $_COMMAND command...\n"
+		. $DOTFILES_PATH/commands/$_COMMAND.sh
+	else
+		color-print red "Command \"$_COMMAND\" can not be found.\n\n"
+		show_help
+	fi
+}
+
+run_all_commands() {
+	_COMMANDS=("managers" "applications" "macos-settings" "configuration")
+
+	color-print cyan "This will run commands:"
+	for _COMMAND in $_COMMANDS; do
+		color-print cyan " - $_COMMAND"
+	done
+	color-print cyan "\nContinue?"
+
+	_ANSWER=No
+	select _RESULT in Yes No; do
+		_ANSWER=$_RESULT
+		break
+	done
+
+	if [[ $_ANSWER == "Yes" ]]; then
+		ask-sudo
+
+		for _COMMAND in $_COMMANDS; do
+			run_command $_COMMAND
+		done
+	fi
+}
+
+case $1 in
 	"" | "--help" | "-h" | "help")
 		show_help
 		;;
 
 	"all")
-		_STEPS=("managers" "applications" "macos-settings" "configuration")
-		color-print cyan "This will run commands:"
-		for _STEP in $_STEPS; do
-			color-print cyan " - $_STEP"
-		done
-		color-print cyan "\nContinue?"
-
-		_ANSWER=No
-		select _RESULT in Yes No; do
-			_ANSWER=$_RESULT
-			break
-		done
-
-		if [[ $_ANSWER == "Yes" ]]; then
-			ask-sudo
-
-			for _STEP in $_STEPS; do
-				color-print cyan "\nRuns $_STEP command...\n"
-				. $DOTFILES_PATH/commands/$_STEP.sh
-			done
-		fi
-	;;
+		run_all_commands
+		;;
 
 	*)
-		shift
-		if [ -f $DOTFILES_PATH/commands/$_COMMAND.sh ]; then
-			color-print cyan "\nRuns $_COMMAND command...\n"
-			. $DOTFILES_PATH/commands/$_COMMAND.sh
-		else
-			color-print red "Command \"$_COMMAND\" can not be found.\n\n"
-			show_help
-		fi
+		run_command $1
 		;;
 esac
