@@ -1,1 +1,3 @@
-alias la="ls -la"
+alias ls="ls -GFp -D "%v %R""
+alias la="ls -oa"
+alias lf="listfiles"

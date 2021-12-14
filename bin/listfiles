@@ -1,0 +1,12 @@
+#!/bin/zsh -e
+
+# Include tools as binary functions
+PATH=$PATH:$DOTFILES_PATH/tools
+echo
+for f in *(DN); do
+	if [ -f $f ]; then
+		color-print yellow "  $f"
+	else
+		color-print green "  $f/"
+	fi
+done
