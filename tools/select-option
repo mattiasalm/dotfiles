@@ -24,8 +24,10 @@ if [ -z $_RESULT_FILE ]; then
 	exit 1
 fi
 
+# Create output file
 touch $_RESULT_FILE
 
+# Grab options from arguments
 shift
 _OPTIONS=(${@})
 _OPTIONS_LENGTH=$(expr ${#_OPTIONS[@]} - 1)
@@ -37,6 +39,7 @@ if [ "$_OPTIONS_LENGTH" -lt 0 ]; then
 	exit 1
 fi
 
+# Clear options prompt
 clear_options() {
 	tput civis
 	tput cuu1
@@ -48,6 +51,7 @@ clear_options() {
 	tput cnorm
 }
 
+# Print options prompt
 print_options() {
 	local _COUNTER=0
 	for _OPTION in ${_OPTIONS[@]}; do
@@ -61,41 +65,37 @@ print_options() {
 	echo
 }
 
-key_press_down() {
-	(( _CURSOR < _OPTIONS_LENGTH )) && (( _CURSOR++ ))
-	clear_options
-	print_options
-}
-
-key_press_up() {
-	(( _CURSOR > 0 )) && (( _CURSOR-- ))
-	clear_options
-	print_options
-}
-
+# Check keycode value and perform associated actions
 check_key_code() {
-	if [[ $1 =~ "1b5b 4100" ]]; then
-		key_press_up
+	local _KEYCODE=$1
+
+	# Key: up
+	if [[ $_KEYCODE =~ "1b5b 4100" ]]; then
+		(( _CURSOR > 0 )) && (( _CURSOR-- ))
+		clear_options
+		print_options
 		catch_key_press
-	elif [[ $1 =~ "1b5b 4200" ]]; then
-		key_press_down
+
+	# Key: down
+	elif [[ $_KEYCODE =~ "1b5b 4200" ]]; then
+		(( _CURSOR < _OPTIONS_LENGTH )) && (( _CURSOR++ ))
+		clear_options
+		print_options
 		catch_key_press
-	elif [[ $1 =~ "0d00 0000" ]]; then
-		# enter
+
+	# Key: enter
+	elif [[ $_KEYCODE =~ "0d00 0000" ]]; then
 		echo $_CURSOR > $_RESULT_FILE
-	elif [[ $1 =~ "1b00 0000" ]]; then
-		# esc
+		exit 0
+
+	# Key: esc
+	elif [[ $_KEYCODE =~ "1b00 0000" ]]; then
 		exit 1
-	elif [[ $1 =~ "5100 0000" ]]; then
-		# Q
-		exit 1
-	elif [[ $1 =~ "7100 0000" ]]; then
-	 	# q
-		exit 1
+
 	fi
 }
 
-# Catch key press action and convert to 
+# Catch key press action and convert to keycode
 catch_key_press() {
 	local _KEYCODE
 	{
