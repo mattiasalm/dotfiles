@@ -59,6 +59,10 @@ Some steps are required to be run manually after the automatic setup is finished
 
 When the setup is finished sign in to Dropbox and then run `mackup restore` to bring back app configurations.
 
+### Hammerspoon
+
+Run Hammerspoon and activate accessibility to ensure full functionality.
+
 ### SSH keys
 
 For all the places that authenticate with the computer with SSH keys they needs to be replaced. [GitHub SSH key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
