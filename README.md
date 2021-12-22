@@ -17,6 +17,7 @@ Uses:
 - [Node.js + npm LTS](https://nodejs.org/en/download/)
 - [Mackup](https://github.com/lra/mackup) - sync application settings
 - [n](https://github.com/tj/n) - Node.js and npm version management
+- [Hammerspoon](https://www.hammerspoon.org/) - Window management and MacOS automation
 
 ## Installation
 
