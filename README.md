@@ -40,8 +40,8 @@ Usage: dotfiles <command>
 
 Commands:
   help                  - Show this help message
-  all                   - Run all installation steps
   prepare               - Prepare system for further installation
+  all                   - Run all installation steps
   managers              - Install application managers
   applications          - Install applications
   macos-settings        - Applies macOS settings
@@ -53,7 +53,7 @@ To do a full setup of the system just run the `dotfiles all` command.
 
 ## Manual setup steps
 
-Some steps are required to be run manually after the automatic setup is finished. 
+Some manual steps are required after the automatic setup is finished. 
 
 ### Mackup
 
@@ -65,4 +65,4 @@ Run Hammerspoon and activate accessibility to ensure full functionality.
 
 ### SSH keys
 
-For all the places that authenticate with the computer with SSH keys they needs to be replaced. [GitHub SSH key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+Update SSH keys in all places needed, such as GitHub. [GitHub SSH key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
