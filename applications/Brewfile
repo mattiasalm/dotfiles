@@ -6,4 +6,4 @@ tap "homebrew/cask-fonts"
 # brews
 brew "mackup"
 brew "exiftool"
-brew "romkatv/powerlevel10k/powerlevel10k"
+brew "powerlevel10k/powerlevel10k"
