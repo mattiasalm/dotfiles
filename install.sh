@@ -24,6 +24,7 @@ done
 
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools
+echo $PATH
 
 # Symlink .zsh-profile
 if [ ! -L $HOME/.zshrc ] && [ -e $HOME/.zshrc ]; then
@@ -47,7 +48,7 @@ for _DOTFILE in $_DOTFILES; do
 done
 
 # Execute shell rc file
-. $HOME/.zshrc
+source $HOME/.zshrc
 
 is-available dotfiles && \
 color-print green "\ndotfiles installation successful!\n"
