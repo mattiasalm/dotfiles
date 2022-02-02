@@ -67,3 +67,21 @@ Run Hammerspoon and activate accessibility to ensure full functionality.
 ### SSH keys
 
 Update SSH keys in all places needed, such as GitHub. [GitHub SSH key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+
+If support for multiple SSH keys is needed, adjust the `~/.ssh/config` file with the needed information. Example of `config` file:
+
+```bash
+# Work bitbucket
+Host bitbucket.org
+IdentityFile ~/.ssh/id_rsa
+
+# Anything else = github
+Host *
+IdentityFile ~/.ssh/id_ed25519
+```
+
+Just make sure that all SSH keys is listed in the SSH agent by typing 
+
+```bash
+$ ssh-add -l
+```
