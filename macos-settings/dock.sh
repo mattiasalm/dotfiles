@@ -32,9 +32,6 @@ defaults write com.apple.dock showhidden -bool true
 # No bouncing icons
 defaults write com.apple.dock no-bouncing -bool true
 
-# Disable menu bar transparency
-defaults write com.apple.universalaccess reduceTransparency -bool true
-
 # Disable run single app at once
 defaults write com.apple.dock single-app -bool false
 

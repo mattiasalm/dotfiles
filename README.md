@@ -14,9 +14,9 @@ Uses:
 
 - [Homebrew](https://brew.sh) - packages [Brewfile](./applications/Brewfile)
 - [homebrew-cask](https://github.com/Homebrew/homebrew-cask) - packages [Brewfile](./applications/Caskfile)
+- [n](https://github.com/tj/n) - Node.js and npm version management
 - [Node.js + npm LTS](https://nodejs.org/en/download/)
 - [Mackup](https://github.com/lra/mackup) - sync application settings
-- [n](https://github.com/tj/n) - Node.js and npm version management
 - [Hammerspoon](https://www.hammerspoon.org/) - Window management and MacOS automation
 
 ## Installation
@@ -24,7 +24,7 @@ Uses:
 1. Install the CLI with `curl`
 
 	```bash
-	curl -Ls "https://raw.githubusercontent.com/mattiasalm/dotfiles/master/remote-install.sh" | bash
+	curl -Ls "https://raw.githubusercontent.com/mattiasalm/dotfiles/master/remote-install.sh" | zsh
 	```
 
 2. Run software update and install Xcode with command:

@@ -3,6 +3,9 @@
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools
 
+# Prompt for sudo up front
+ask-sudo
+
 # Install Homebrew
 if is-available brew; then
 	color-print yellow "Homebrew already installed"
@@ -23,8 +26,11 @@ else
 	fi
 fi
 
-# Install npm
+# Install n
 if is-available n; then
+	sudo mkdir -p /usr/local/n
+	sudo chown -R $(whoami) /usr/local/n
+	sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
 	n lts
 	color-print yellow "npm and Node installed/updated"
 else
