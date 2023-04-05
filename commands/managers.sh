@@ -28,9 +28,8 @@ fi
 
 # Install n
 if is-available n; then
-	sudo mkdir -p /usr/local/n
-	sudo chown -R $(whoami) /usr/local/n
-	sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+	sudo mkdir -p /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+	sudo chown -R $(whoami) /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
 	n lts
 	color-print yellow "npm and Node installed/updated"
 else
