@@ -26,7 +26,7 @@ else
 	fi
 fi
 
-# Install n
+# Install Node and npm
 if is-available n; then
 	sudo mkdir -p /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
 	sudo chown -R $(whoami) /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
