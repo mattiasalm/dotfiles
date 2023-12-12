@@ -10,7 +10,7 @@ ask-sudo
 if is-available brew; then
 	color-print yellow "Homebrew already installed"
 else
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 	color-print yellow "Homebrew installed"
 fi
 
