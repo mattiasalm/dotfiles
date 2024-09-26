@@ -1,4 +1,7 @@
-alias ls="echo && exa -lh --group-directories-first --git --icons --no-permissions --no-user"
-alias la="echo && exa -lahF --group-directories-first --git --icons"
-alias lr="echo && exa --tree --long --no-permissions --no-user --git -h"
-alias lf="listfiles"
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+alias lf='listfiles'
+alias wttr="curl 'wttr.in/?M'"

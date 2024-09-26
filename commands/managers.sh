@@ -10,7 +10,13 @@ ask-sudo
 if is-available brew; then
 	color-print yellow "Homebrew already installed"
 else
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+
+	if ! is-available brew; then
+			echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"' >> ~/.zprofile
+			eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+	fi
+
 	color-print yellow "Homebrew installed"
 fi
 

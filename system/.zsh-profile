@@ -10,3 +10,5 @@ fi
 
 export CLICOLOR=1
 export LSCOLORS=cxgxfxExBxagafabAbacAc
+
+source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
