@@ -21,6 +21,6 @@ else
 	color-print red "Homebrew missing, needed for application installation"
 fi
 
-# Load PowerLevel10k from zshrc
-color-print yellow "Add loading of PowerLevel10k theme"
-replace-in-file "source.*zsh-theme" "source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme" $HOME/.zshrc
+# Add oh-my-posh loading
+color-print yellow "Add loading of oh-my-posh"
+replace-in-file "eval .*oh-my-posh\.json)\"" "eval \"\$(oh-my-posh init zsh --config ~/.dotfiles/config/oh-my-posh.json)\"" $HOME/.zshrc
