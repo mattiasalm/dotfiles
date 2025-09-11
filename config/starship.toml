@@ -1,0 +1,83 @@
+# Starship configuration
+# Uses Cousine Nerd Font for optimal display
+
+# General settings
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# Username
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+# Hostname
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold yellow) "
+disabled = false
+
+# Directory
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "at [$path]($style)[$read_only]($read_only_style) "
+
+# Git branch
+[git_branch]
+symbol = " "
+format = "via [$symbol$branch]($style) "
+truncation_length = 4
+truncation_symbol = "…/"
+style = "bold green"
+
+# Git status
+[git_status]
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "bold green"
+conflicted = "🏳"
+up_to_date = " "
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = " "
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "襁 "
+deleted = " "
+
+# Command duration
+[cmd_duration]
+format = "took [$duration]($style) "
+min_time = 2_000
+
+# Python
+[python]
+symbol = " "
+python_binary = "python3"
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+
+# Character
+[character]
+success_symbol = " [❯](purple)"
+error_symbol = " [❯](red)"
+vicmd_symbol = " [❮](green)"

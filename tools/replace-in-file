@@ -1,14 +1,28 @@
 #!/bin/zsh -e
 
-_SEARCH_REGEX=$1
-_REPLACE=$2
-_FILE=$3
+_SEARCH_REGEX="$1"
+_REPLACE="$2" 
+_FILE="$3"
 
-# Retrieve the real path of the supplied file
-_REAL_FILE=$(. $HOME/.dotfiles/tools/read-symlink $_FILE)
+# Validate inputs
+if [ -z "$_SEARCH_REGEX" ] || [ -z "$_REPLACE" ] || [ -z "$_FILE" ]; then
+    color-print red "Usage: replace-in-file <search_regex> <replace_text> <file>"
+    exit 1
+fi
 
-if [ -f $_REAL_FILE ] && grep -q $_SEARCH_REGEX $_REAL_FILE; then
-	sed -i -- "s|$_SEARCH_REGEX|$_REPLACE|g" $_REAL_FILE
+# Use DOTFILES_PATH instead of hardcoded path
+_REAL_FILE=$(. "$DOTFILES_PATH/tools/read-symlink" "$_FILE")
+
+# Create file if it doesn't exist
+if [ ! -f "$_REAL_FILE" ]; then
+    touch "$_REAL_FILE"
+fi
+
+# Check if pattern exists and replace, otherwise append
+if grep -q "$_SEARCH_REGEX" "$_REAL_FILE"; then
+    # Use backup suffix for safety
+    sed -i.bak "s|$_SEARCH_REGEX|$_REPLACE|g" "$_REAL_FILE"
+    rm -f "${_REAL_FILE}.bak"
 else
-	echo "\n$_REPLACE" >> $_REAL_FILE
+    echo "$_REPLACE" >> "$_REAL_FILE"
 fi

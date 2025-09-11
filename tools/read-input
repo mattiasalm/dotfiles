@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+# Simple text input utility
+# Usage: read-input <output_file> <prompt_text>
+
+_RESULT_FILE=$1
+_PROMPT_TEXT=$2
+
+# Check if output file is provided
+if [ -z "$_RESULT_FILE" ]; then
+	color-print red "No output file provided"
+	exit 1
+fi
+
+# Check if prompt text is provided
+if [ -z "$_PROMPT_TEXT" ]; then
+	_PROMPT_TEXT="Enter value:"
+fi
+
+# Create output file
+touch "$_RESULT_FILE"
+
+# Display prompt
+color-print cyan "$_PROMPT_TEXT: "
+
+# Read user input
+read -r _USER_INPUT
+
+# Write result to file
+echo "$_USER_INPUT" > "$_RESULT_FILE"

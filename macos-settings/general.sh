@@ -3,16 +3,54 @@
 ## General UI/UX
 
 # Set computer name
-_COMPUTERNAME="Mattias Alm's MacBook Pro"
-_LOCALHOSTNAME="mattias-alm-macbook-pro"
-sudo scutil --set ComputerName $_COMPUTERNAME
-sudo scutil --set HostName $_COMPUTERNAME
-sudo scutil --set LocalHostName $_LOCALHOSTNAME
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $_LOCALHOSTNAME
+read-input $DOTFILES_PATH/.tmp "Enter computer name"
+_COMPUTERNAME=$(<$DOTFILES_PATH/.tmp)
+
+# Generate hostname from computer name (lowercase, spaces to hyphens)
+_LOCALHOSTNAME=$(echo "$_COMPUTERNAME" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | sed 's/[^a-z0-9-]//g')
+
+color-print yellow "Setting computer name to: $_COMPUTERNAME"
+color-print yellow "Setting hostname to: $_LOCALHOSTNAME"
+
+sudo scutil --set ComputerName "$_COMPUTERNAME"
+sudo scutil --set HostName "$_COMPUTERNAME"
+sudo scutil --set LocalHostName "$_LOCALHOSTNAME"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$_LOCALHOSTNAME"
 
 # Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "sv" "en"
-defaults write NSGlobalDomain AppleLocale -string "sv_SE@currency=SEK"
+color-print cyan "Select your preferred language:"
+select-option $DOTFILES_PATH/.tmp "Swedish (sv)" "English (en)" "Other (keep current)"
+_LANGUAGE_OPTION=$(<$DOTFILES_PATH/.tmp)
+
+case $_LANGUAGE_OPTION in
+    0)
+        # Swedish
+        _PRIMARY_LANG="sv"
+        _LOCALE="sv_SE@currency=SEK"
+        ;;
+    1) 
+        # English
+        _PRIMARY_LANG="en"
+        _LOCALE="en_US@currency=SEK"
+        ;;
+    *)
+        # Other - keep current system defaults
+        color-print yellow "Keeping current system language settings"
+        _PRIMARY_LANG=$(defaults read NSGlobalDomain AppleLanguages | head -1 | sed 's/[^a-z]//g' || echo "en")
+        _LOCALE=$(defaults read NSGlobalDomain AppleLocale 2>/dev/null | sed 's/@currency=.*/@currency=SEK/' || echo "en_US@currency=SEK")
+        ;;
+esac
+
+if [ "$_LANGUAGE_OPTION" -ne 2 ]; then
+    color-print yellow "Setting language to: $_PRIMARY_LANG"
+    color-print yellow "Setting locale to: $_LOCALE"
+    
+    defaults write NSGlobalDomain AppleLanguages -array "$_PRIMARY_LANG" "en"
+    defaults write NSGlobalDomain AppleLocale -string "$_LOCALE"
+else
+    # Still set SEK currency for "Other" option
+    defaults write NSGlobalDomain AppleLocale -string "$_LOCALE"
+fi
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 

@@ -3,5 +3,20 @@
 # Ask for the administrator password upfront
 sudo -v
 
-# Keep-alive: update existing `sudo` time stamp until this script has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# Keep-alive: update existing `sudo` time stamp until parent process finished
+# Store the PID for cleanup
+_SUDO_PID_FILE="/tmp/dotfiles_sudo_$$"
+echo $$ > "$_SUDO_PID_FILE"
+
+keep_sudo_alive() {
+    local parent_pid=$1
+    while kill -0 "$parent_pid" 2>/dev/null; do
+        sudo -n true 2>/dev/null || break
+        sleep 60
+    done
+    rm -f "$_SUDO_PID_FILE" 2>/dev/null
+}
+
+# Run keep-alive in background with proper cleanup
+keep_sudo_alive $$ &
+echo $! > "${_SUDO_PID_FILE}.keeper"

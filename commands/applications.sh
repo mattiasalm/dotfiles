@@ -21,6 +21,13 @@ else
 	color-print red "Homebrew missing, needed for application installation"
 fi
 
-# Add oh-my-posh loading
-color-print yellow "Add loading of oh-my-posh"
-replace-in-file "eval .*oh-my-posh\.json)\"" "eval \"\$(oh-my-posh init zsh --config ~/.dotfiles/config/oh-my-posh.json)\"" $HOME/.zshrc
+# Add Starship loading
+color-print yellow "Add loading of Starship"
+replace-in-file "eval.*starship init.*" "eval \"\$(starship init zsh)\"" $HOME/.zshrc
+
+# Copy Starship config
+color-print yellow "Setting up Starship configuration"
+if [ ! -f $HOME/.config/starship.toml ]; then
+    mkdir -p $HOME/.config
+    cp $DOTFILES_PATH/config/starship.toml $HOME/.config/starship.toml
+fi

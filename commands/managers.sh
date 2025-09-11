@@ -10,7 +10,7 @@ ask-sudo
 if is-available brew; then
 	color-print yellow "Homebrew already installed"
 else
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
 	if ! is-available brew; then
 			echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"' >> ~/.zprofile
@@ -34,8 +34,9 @@ fi
 
 # Install Node and npm
 if is-available n; then
-	sudo mkdir -p /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
-	sudo chown -R $(whoami) /usr/local/n /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+	# Set N_PREFIX to use Homebrew's Apple Silicon directory
+	export N_PREFIX="/opt/homebrew"
+	
 	n lts
 	color-print yellow "npm and Node installed/updated"
 else
