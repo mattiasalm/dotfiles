@@ -6,26 +6,30 @@ PATH=$PATH:$DOTFILES_PATH/tools
 _BIN_NAME=$(basename $0)
 
 show_help() {
-	color-print green "\nUsage: $_BIN_NAME <command>\n"
-	color-print green "Commands:"
-	color-print green "  help\t\t\t- Show this help message"
-	color-print green "  prepare\t\t- Prepare system for further installation"
-	color-print green "  all\t\t\t- Do all installation steps"
-	color-print green "  managers\t\t- Install application managers"
-	color-print green "  applications\t\t- Install applications"
-	color-print green "  macos-settings\t- Applies macOS settings"
-	color-print green "  configuration\t\t- Add system configuration"
-	color-print green "  update\t\t- Update system, managers and applications"
+	echo
+	color-print white "Usage: $_BIN_NAME <command>"
+	echo
+	color-print white "Commands:"
+	color-print white "  help\t\t\t- Show this help message"
+	color-print white "  prepare\t\t- Prepare system for installation"
+	color-print white "  all\t\t\t- Run complete setup process"
+	color-print white "  managers\t\t- Install package managers"
+	color-print white "  applications\t\t- Install applications and tools"
+	color-print white "  macos-settings\t- Configure macOS system settings"
+	color-print white "  configuration\t\t- Setup dotfiles configuration"
+	color-print white "  update\t\t- Update system and applications"
+	echo
 }
 
 run_command() {
 	_COMMAND=$1
 
 	if [ -f $DOTFILES_PATH/commands/$_COMMAND.sh ]; then
-		color-print cyan "\nRuns $_COMMAND command...\n"
+		color-print blue "Running $_COMMAND..."
 		. $DOTFILES_PATH/commands/$_COMMAND.sh
+		color-print green "$_COMMAND completed successfully"
 	else
-		color-print red "Command \"$_COMMAND\" can not be found.\n\n"
+		color-print red "Error: Command \"$_COMMAND\" not found"
 		show_help
 	fi
 }
@@ -33,20 +37,29 @@ run_command() {
 run_all_commands() {
 	_COMMANDS=("managers" "applications" "macos-settings" "configuration")
 
-	color-print cyan "\nThis will run commands:"
+	echo
+	color-print blue "Complete setup will run these components:"
 	for _COMMAND in $_COMMANDS; do
-		color-print cyan " - $_COMMAND"
+		color-print blue " • $_COMMAND"
 	done
-	color-print cyan "\n\nContinue?\n"
-
+	
+	echo
+	color-print cyan "Continue with complete setup:"
 	select-option $DOTFILES_PATH/.tmp No Yes
 	_SELECTED_OPTION=$(<$DOTFILES_PATH/.tmp)
+	
 	if (( _SELECTED_OPTION == 1 )); then
 		ask-sudo
 
 		for _COMMAND in $_COMMANDS; do
+			echo
 			run_command $_COMMAND
 		done
+		
+		echo
+		color-print green "Complete setup finished successfully"
+	else
+		color-print yellow "Setup cancelled by user"
 	fi
 }
 

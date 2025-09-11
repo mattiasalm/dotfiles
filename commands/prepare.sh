@@ -6,57 +6,61 @@ PATH=$PATH:$DOTFILES_PATH/tools
 # Prompt for sudo up front
 ask-sudo
 
-# Check for software updates
-color-print yellow "Checking for macOS software updates"
+echo
+color-print blue "Checking macOS updates..."
 _UPDATES_AVAILABLE=$(softwareupdate -l 2>&1)
 if echo "$_UPDATES_AVAILABLE" | grep -q "No new software available"; then
-    color-print green "macOS is up to date"
+    color-print green "macOS up to date"
 else
-    color-print cyan "Software updates available:"
+    color-print blue "Software updates available:"
     echo "$_UPDATES_AVAILABLE" | grep "Title:"
+    
     echo
+    color-print cyan "Select update option:"
     select-option $DOTFILES_PATH/.tmp "Skip updates" "Install recommended" "Install all"
     _SELECTED_OPTION=$(<$DOTFILES_PATH/.tmp)
     
     case $_SELECTED_OPTION in
         1)
-            color-print yellow "Installing recommended updates only"
+            color-print blue "Installing recommended updates..."
             sudo softwareupdate --install --recommended
+            color-print green "Recommended updates installed successfully"
             ;;
         2) 
-            color-print yellow "Installing all available updates"
+            color-print blue "Installing all available updates..."
             sudo softwareupdate --install --all
+            color-print green "All updates installed successfully"
             ;;
         *)
-            color-print yellow "Skipping software updates"
+            color-print yellow "Updates skipped by user"
             ;;
     esac
 fi
 
-# Install Rosetta 2 for Intel app compatibility
-color-print yellow "Checking Rosetta 2 installation"
+echo
+color-print blue "Checking Rosetta 2..."
 if /usr/bin/pgrep -q oahd; then
-    color-print green "Rosetta 2 already installed"
+    color-print yellow "Rosetta 2 already configured"
 else
-    color-print cyan "Installing Rosetta 2 for Intel app compatibility"
+    color-print blue "Installing Rosetta 2 for Intel app compatibility..."
     softwareupdate --install-rosetta --agree-to-license
     if [ $? -eq 0 ]; then
         color-print green "Rosetta 2 installed successfully"
     else
-        color-print red "Failed to install Rosetta 2"
+        color-print red "Error: Failed to install Rosetta 2"
     fi
 fi
 
-# Install Xcode Command Line Tools
-color-print yellow "Checking Xcode Command Line Tools"
+echo
+color-print blue "Checking Xcode Command Line Tools..."
 if xcode-select -p &>/dev/null; then
-    color-print green "Xcode Command Line Tools already installed"
+    color-print yellow "Xcode Command Line Tools already configured"
 else
-    color-print cyan "Installing Xcode Command Line Tools (required for development)"
+    color-print blue "Installing Xcode Command Line Tools..."
     xcode-select --install
     
     # Wait for installation to complete
-    color-print yellow "Waiting for Xcode Command Line Tools installation..."
+    color-print blue "Waiting for installation to complete..."
     until xcode-select -p &>/dev/null; do
         sleep 5
     done

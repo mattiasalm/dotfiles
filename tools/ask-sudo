@@ -1,7 +1,14 @@
 #!/bin/zsh -e
 
-# Ask for the administrator password upfront
-sudo -v
+# Check if sudo credentials are already cached and valid
+if sudo -n true 2>/dev/null; then
+    color-print green "Administrator credentials already available"
+else
+    # Ask for the administrator password only if needed
+    echo
+    color-print cyan "Administrator password:"
+    sudo -v
+fi
 
 # Keep-alive: update existing `sudo` time stamp until parent process finished
 # Store the PID for cleanup
@@ -12,7 +19,7 @@ keep_sudo_alive() {
     local parent_pid=$1
     while kill -0 "$parent_pid" 2>/dev/null; do
         sudo -n true 2>/dev/null || break
-        sleep 60
+        sleep 180
     done
     rm -f "$_SUDO_PID_FILE" 2>/dev/null
 }

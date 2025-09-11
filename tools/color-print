@@ -1,18 +1,51 @@
 #!/bin/zsh -e
 
+# Color-print utility for consistent terminal output
+#
+# STANDARDIZED COLOR SCHEME:
+# 
+# 🔵 BLUE    - Status/Progress     | Checking, installing, configuring
+#              Examples: "Checking Homebrew...", "Installing applications..."
+#
+# 🟢 GREEN   - Success/Complete    | Successful operations, up-to-date items  
+#              Examples: "Homebrew installed successfully", "macOS up to date"
+#
+# 🟡 YELLOW  - Already Present     | Items already configured, user skips
+#              Examples: "Homebrew already configured", "Updates skipped by user"
+#
+# 🔴 RED     - Errors/Failures     | Critical issues, missing dependencies
+#              Examples: "Error: Homebrew required", "Error: Command not found"
+#
+# 🔵 CYAN    - User Prompts        | Interactive input requests
+#              Examples: "Computer name:", "Continue with setup:"
+#
+# ⚪ WHITE   - Help/Documentation  | Help text, usage information
+#              Examples: CLI help messages, documentation
+#
+# ⬜ GREY    - Notes/Hints          | Additional information, hints to user
+#              Examples: "(press Enter for default)", "Tip: you can skip this"
+#
+# MESSAGE FORMAT STANDARDS:
+# - Status Updates: "[Action] [target]..." → "Checking Homebrew..."
+# - Success Messages: "[Item] [action] successfully" → "Node.js installed successfully" 
+# - Already Present: "[Item] already configured" → "Starship already configured"
+# - Error Messages: "Error: [description]" → "Error: Homebrew required"
+# - User Prompts: "[Question/Action]:" → "Select system language:"
+
 reset='\e[0m'
 red='\e[31m'
 green='\e[32m'
 yellow='\e[33m'
 blue='\e[34m'
-magenta='\e[35m'
+white='\e[37m'
+grey='\e[90m'
 cyan='\e[36m'
 
 _COLOR=$1
 _TEXT=${*:2}
 
 case $_COLOR in
-	"blue" | "red" | "green" | "yellow" | "magenta" | "cyan" | "aqua" )
+	"blue" | "red" | "green" | "yellow" | "white" | "grey" | "cyan" | "aqua" )
 		printf '%b\n' ${(P)_COLOR}$_TEXT$reset
 		;;
 	*)
