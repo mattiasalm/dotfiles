@@ -3,6 +3,9 @@
 # Include tools as binary functions
 PATH=$PATH:$DOTFILES_PATH/tools
 
+# Prompt for sudo up front
+ask-sudo
+
 echo
 color-print blue "Setting up Mackup configuration..."
 _MACKUP_FILE=$DOTFILES_PATH/config/.mackup.cfg

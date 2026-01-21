@@ -6,7 +6,7 @@ Automated macOS setup for Apple Silicon Macs with a CLI to manage installation a
 
 **Required:**
 - Apple Silicon Mac (M1, M2, M3, or later)
-- macOS Ventura (13.0) or later
+- macOS 15 (Sequoia) or later
 - Internet connection
 - Admin privileges (you'll be prompted for password)
 
@@ -41,19 +41,20 @@ This is my **personal** dotfiles configuration, tailored for my specific workflo
 
 **Development Tools:**
 - Node.js LTS + npm + Yarn + Bun
-- PostgreSQL 16 + OpenJDK 21
+- PostgreSQL 18 + OpenJDK 21
 - Docker + Git tools
 - Visual Studio Code + extensions
 
 **Applications:** (50+ apps including)
 - Productivity: 1Password, Alfred, Slack, Microsoft Office
-- Development: Docker, Postman, Fork, Hyper terminal  
+- Development: Docker, Postman, Fork, Ghostty terminal  
 - Creative: Adobe Creative Cloud, Figma
 - Utilities: Hammerspoon, Stats, Dropbox
 
 **macOS Configuration:**
 - System preferences (Dock, Finder, Trackpad, etc.)
 - Shell configuration with Starship prompt + Cousine Nerd Font
+- Terminal configuration (Ghostty setup with custom config)
 - Application settings sync via Mackup
 
 ## Installation
@@ -87,15 +88,22 @@ Usage: dotfiles <command>
 Commands:
   help                  - Show this help message
   prepare               - Prepare system for further installation
+                         (installs macOS updates, Rosetta 2, Xcode Command Line Tools)
   all                   - Run all installation steps
-  managers              - Install application managers
+                         (runs managers, applications, macos-settings, configuration)
+  managers              - Install package managers
+                         (Homebrew with package updates, Node.js version manager, Node.js LTS)
   applications          - Install applications
-  macos-settings        - Applies macOS settings
-  configuration         - Add system configuration
-  update                - Update system, managers and applications
+                         (brew bundle from Brewfile, Starship + Ghostty configuration)
+  macos-settings        - Apply macOS system settings
+                         (Dock, Finder, Trackpad, and other system preferences)
+  configuration         - Add system configuration files
+                         (Mackup configuration for app settings sync)
+  update                - Update system and packages
+                         (macOS updates, Homebrew packages, Node.js version)
 ```
 
-To do a full setup of the system just run the `dotfiles all` command.
+**Quick start:** Run `dotfiles all` for complete setup after running `dotfiles prepare`.
 
 ## Post-Installation Setup
 

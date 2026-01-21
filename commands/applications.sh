@@ -30,10 +30,18 @@ replace-in-file "eval.*starship init.*" "eval \"\$(starship init zsh)\"" $HOME/.
 
 echo
 color-print blue "Setting up Starship configuration..."
-if [ ! -f $HOME/.config/starship.toml ]; then
-    mkdir -p $HOME/.config
-    cp $DOTFILES_PATH/config/starship.toml $HOME/.config/starship.toml
-    color-print green "Starship configuration installed successfully"
-else
-    color-print yellow "Starship configuration already configured"
+mkdir -p $HOME/.config
+if [ -f $HOME/.config/starship.toml ]; then
+    color-print yellow "Overwriting existing Starship configuration..."
 fi
+cp $DOTFILES_PATH/config/starship.toml $HOME/.config/starship.toml
+color-print green "Starship configuration installed successfully"
+
+echo
+color-print blue "Setting up Ghostty configuration..."
+mkdir -p $HOME/ghostty
+if [ -f $HOME/ghostty/config ]; then
+    color-print yellow "Overwriting existing Ghostty configuration..."
+fi
+cp $DOTFILES_PATH/config/ghostty-config $HOME/ghostty/config
+color-print green "Ghostty configuration installed successfully"

@@ -1,0 +1,15 @@
+# This is the configuration file for Ghostty.
+#
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+#
+# Reload config: cmd + shift + ,
+
+
+font-family = MesloLGL Nerd Font Mono
+background = #111111
+theme = Chalkboard
+window-padding-x = 16
+font-size = 14
