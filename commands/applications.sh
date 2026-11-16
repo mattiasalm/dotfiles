@@ -6,6 +6,8 @@ PATH=$PATH:$DOTFILES_PATH/tools
 # Prompt for sudo up front
 ask-sudo
 
+_BUNDLE_FAILED=0
+
 echo
 color-print blue "Checking application bundles..."
 _BUNDLES=("Brewfile")
@@ -15,8 +17,12 @@ if is-available brew; then
 			color-print yellow "$_BUNDLE already configured"
 		else
 			color-print blue "Installing applications from $_BUNDLE..."
-			brew bundle --file="$DOTFILES_PATH/applications/$_BUNDLE"
-			color-print green "$_BUNDLE applications installed successfully"
+			if brew bundle --file="$DOTFILES_PATH/applications/$_BUNDLE"; then
+				color-print green "$_BUNDLE applications installed successfully"
+			else
+				color-print red "Error: Some applications from $_BUNDLE failed to install"
+				_BUNDLE_FAILED=1
+			fi
 		fi
 	done
 else
@@ -45,3 +51,6 @@ if [ -f $HOME/.config/ghostty/config.ghostty ]; then
 fi
 cp $DOTFILES_PATH/config/ghostty-config $HOME/.config/ghostty/config.ghostty
 color-print green "Ghostty configuration installed successfully"
+
+# Report failed application installs, after the configuration above has been set up
+return $_BUNDLE_FAILED

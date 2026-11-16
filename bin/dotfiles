@@ -39,7 +39,7 @@ run_command() {
 }
 
 run_all_commands() {
-	_COMMANDS=("managers" "applications" "macos-settings" "configuration")
+	_COMMANDS=("managers" "macos-settings" "applications" "configuration")
 
 	echo
 	color-print blue "Complete setup will run these components:"

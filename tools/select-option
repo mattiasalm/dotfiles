@@ -24,8 +24,8 @@ if [ -z $_RESULT_FILE ]; then
 	exit 1
 fi
 
-# Create output file
-touch $_RESULT_FILE
+# Create an empty output file, so a cancelled prompt does not leave an earlier answer in it
+: > $_RESULT_FILE
 
 # Grab options from arguments
 shift

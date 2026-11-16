@@ -65,7 +65,7 @@ This is my **personal** dotfiles configuration, tailored for my specific workflo
 	source <(curl -Ls "https://raw.githubusercontent.com/mattiasalm/dotfiles/master/remote-install.sh")
 	```
 
-2. Run software update and install Xcode with command:
+2. Install macOS updates with command:
 	```bash
 	dotfiles prepare
 	```
@@ -88,9 +88,9 @@ Usage: dotfiles <command>
 Commands:
   help                  - Show this help message
   prepare               - Prepare system for further installation
-                         (installs macOS updates, Rosetta 2, Xcode Command Line Tools)
+                         (installs macOS updates)
   all                   - Run all installation steps
-                         (runs managers, applications, macos-settings, configuration)
+                         (runs managers, macos-settings, applications, configuration)
   managers              - Install package managers
                          (Homebrew with package updates, Node.js version manager, Node.js LTS)
   applications          - Install applications

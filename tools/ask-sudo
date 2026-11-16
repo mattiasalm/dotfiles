@@ -10,20 +10,24 @@ else
     sudo -v
 fi
 
-# Keep-alive: update existing `sudo` time stamp until parent process finished
-# Store the PID for cleanup
-_SUDO_PID_FILE="/tmp/dotfiles_sudo_$$"
-echo $$ > "$_SUDO_PID_FILE"
+# Keep-alive: update existing `sudo` time stamp until the calling process has finished
+# The calling process is watched, since this script itself ends right away
+_CALLER_PID=$PPID
+
+# One keep-alive per calling process, its PID is stored to avoid starting another one
+_KEEPER_FILE="${TMPDIR:-/tmp}/dotfiles_sudo_$_CALLER_PID"
+if [ -f "$_KEEPER_FILE" ] && kill -0 "$(<$_KEEPER_FILE)" 2>/dev/null; then
+    exit 0
+fi
 
 keep_sudo_alive() {
-    local parent_pid=$1
-    while kill -0 "$parent_pid" 2>/dev/null; do
+    while kill -0 "$_CALLER_PID" 2>/dev/null; do
         sudo -n true 2>/dev/null || break
-        sleep 180
+        sleep 60
     done
-    rm -f "$_SUDO_PID_FILE" 2>/dev/null
+    rm -f "$_KEEPER_FILE"
 }
 
-# Run keep-alive in background with proper cleanup
-keep_sudo_alive $$ &
-echo $! > "${_SUDO_PID_FILE}.keeper"
+# Run keep-alive in background, detached from this script
+keep_sudo_alive &!
+echo $! > "$_KEEPER_FILE"

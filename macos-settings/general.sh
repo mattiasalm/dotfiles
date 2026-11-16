@@ -55,7 +55,7 @@ case $_LANGUAGE_OPTION in
         ;;
 esac
 
-if [ "$_LANGUAGE_OPTION" -ne 2 ]; then
+if [ "$_LANGUAGE_OPTION" = 0 ] || [ "$_LANGUAGE_OPTION" = 1 ]; then
     color-print blue "Setting system language: $_PRIMARY_LANG"
     color-print blue "Setting locale: $_LOCALE"
     
