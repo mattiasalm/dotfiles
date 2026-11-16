@@ -39,9 +39,9 @@ color-print green "Starship configuration installed successfully"
 
 echo
 color-print blue "Setting up Ghostty configuration..."
-mkdir -p $HOME/ghostty
-if [ -f $HOME/ghostty/config ]; then
+mkdir -p $HOME/.config/ghostty
+if [ -f $HOME/.config/ghostty/config.ghostty ]; then
     color-print yellow "Overwriting existing Ghostty configuration..."
 fi
-cp $DOTFILES_PATH/config/ghostty-config $HOME/ghostty/config
+cp $DOTFILES_PATH/config/ghostty-config $HOME/.config/ghostty/config.ghostty
 color-print green "Ghostty configuration installed successfully"
