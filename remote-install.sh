@@ -16,3 +16,6 @@ fi
 cd $_TEMP_TARGET
 zsh install.sh
 cd $_CURRENT_DIR
+
+# Make the dotfiles command available in the current shell, when this script is sourced
+source $HOME/.dotfiles/system/.zsh-profile

@@ -62,7 +62,7 @@ This is my **personal** dotfiles configuration, tailored for my specific workflo
 1. Install the CLI with `curl`
 
 	```bash
-	curl -Ls "https://raw.githubusercontent.com/mattiasalm/dotfiles/master/remote-install.sh" | zsh
+	source <(curl -Ls "https://raw.githubusercontent.com/mattiasalm/dotfiles/master/remote-install.sh")
 	```
 
 2. Run software update and install Xcode with command:

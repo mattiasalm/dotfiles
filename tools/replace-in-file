@@ -24,5 +24,9 @@ if grep -q "$_SEARCH_REGEX" "$_REAL_FILE"; then
     sed -i.bak "s|$_SEARCH_REGEX|$_REPLACE|g" "$_REAL_FILE"
     rm -f "${_REAL_FILE}.bak"
 else
+    # Start on a new line if the file does not end with one
+    if [ -n "$(tail -c 1 "$_REAL_FILE")" ]; then
+        echo >> "$_REAL_FILE"
+    fi
     echo "$_REPLACE" >> "$_REAL_FILE"
 fi

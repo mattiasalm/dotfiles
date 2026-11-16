@@ -6,6 +6,12 @@ if [[ ! $SHELL =~ zsh ]]; then
 	chsh -s $(which zsh)
 fi
 
+# Older installs symlinked .zshrc into .dotfiles, turn it into a real file so its content survives the cleanup below
+if [ -L $HOME/.zshrc ]; then
+	cat $HOME/.zshrc > $HOME/.zshrc-migrated 2> /dev/null || true
+	mv $HOME/.zshrc-migrated $HOME/.zshrc
+fi
+
 # Clean .dotfiles path and copy files there
 rm -rf $HOME/.dotfiles
 mkdir -p $HOME/.dotfiles
@@ -23,27 +29,14 @@ done
 export PATH=$PATH:$HOME/.dotfiles/tools
 echo $PATH
 
-# Symlink .zsh-profile
-if [ ! -L $HOME/.zshrc ] && [ -e $HOME/.zshrc ]; then
-	mv $HOME/.zshrc $HOME/.zshrc-backup
-fi
-ln -sf $HOME/.dotfiles/system/.zsh-profile $HOME/.zshrc
+# Tools rely on DOTFILES_PATH, which the shell rc file does not provide yet on a first install
+export DOTFILES_PATH=$HOME/.dotfiles
 
-# Add or update .dotfiles binary path to $PATH in shell rc file
-$HOME/.dotfiles/tools/replace-in-file "export\ PATH.*$" "export PATH=\$PATH:$HOME/.dotfiles/bin" $HOME/.zshrc
+# Load the dotfiles shell profile from the shell rc file, which stays the user's own file
+$HOME/.dotfiles/tools/replace-in-file "source .*/\.zsh-profile" "source $HOME/.dotfiles/system/.zsh-profile" $HOME/.zshrc
 
-# Add or update .dotfiles path export in shell rc file
-$HOME/.dotfiles/tools/replace-in-file "export DOTFILES_PATH.*$" "export DOTFILES_PATH=$HOME/.dotfiles" $HOME/.zshrc
-
-# Add additional dotfiles
-_DOTFILES=("alias")
-for _DOTFILE in $_DOTFILES; do
-	_FILE=$HOME/.dotfiles/system/.$_DOTFILE
-	$HOME/.dotfiles/tools/replace-in-file "source *.$_DOTFILE" "source $_FILE" $HOME/.zshrc
-done
-
-# Execute shell rc file
-source $HOME/.zshrc
+# Execute the dotfiles shell profile
+source $HOME/.dotfiles/system/.zsh-profile
 
 $HOME/.dotfiles/tools/is-available dotfiles && \
 $HOME/.dotfiles/tools/color-print green "\ndotfiles installation successful!\n"
