@@ -27,7 +27,6 @@ done
 
 # Include tools as binary functions
 export PATH=$PATH:$HOME/.dotfiles/tools
-echo $PATH
 
 # Tools rely on DOTFILES_PATH, which the shell rc file does not provide yet on a first install
 export DOTFILES_PATH=$HOME/.dotfiles
