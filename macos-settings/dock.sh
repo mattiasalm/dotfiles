@@ -15,9 +15,6 @@ defaults write com.apple.dock tilesize -int 64
 # Turn off magnification
 defaults write com.apple.dock magnification -bool false
 
-# Disable Launchpad gesture
-defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
-
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
@@ -43,9 +40,7 @@ defaults write com.apple.dock single-app -bool false
 ##  4: Desktop
 ##  5: Start screen saver
 ##  6: Disable screen saver
-##  7: Dashboard
 ## 10: Put display to sleep
-## 11: Launchpad
 ## 12: Notification Center
 ## Modifier sets combination key
 ##  no modifier key is 0
@@ -66,4 +61,4 @@ defaults write com.apple.dock wvous-br-corner -int 0
 defaults write com.apple.dock wvous-br-modifier -int 0
 
 # Don't show recently used applications in the Dock
-defaults write com.Apple.Dock show-recents -bool false
+defaults write com.apple.dock show-recents -bool false

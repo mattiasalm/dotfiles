@@ -20,9 +20,6 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Finder: show path bar
 defaults write com.apple.finder ShowPathbar -bool true
 
-# Finder: allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
-
 # Disable Quick look animation
 defaults write -g QLPanelAnimationDuration -float 0
 
@@ -47,12 +44,8 @@ defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
-# Use AirDrop over every interface.
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-# Always open everything in Finder's list view.
-# Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+# Use column view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `Nlsv`, `glyv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Set Downloads as the default location for new Finder windows

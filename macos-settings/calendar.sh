@@ -2,7 +2,7 @@
 
 ## Calendar               
 
-# Show week numbers (10.8 only)
+# Show week numbers
 defaults write com.apple.iCal "Show Week Numbers" -bool true
 
 # Week starts on monday

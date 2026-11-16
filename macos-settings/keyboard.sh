@@ -19,11 +19,10 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 # Short delay, Lower = shorter delay. Default is 25, minimum is 10.
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-# Automatically illuminate built-in MacBook keyboard in low light
-defaults write com.apple.BezelServices kDim -bool true
-
-# Turn off keyboard illumination when computer is not used for 5 minutes
-defaults write com.apple.BezelServices kDimTime -int 300
-
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable the Spotlight keyboard shortcuts (⌘ + Space and ⌥ + ⌘ + Space)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/><key>value</key><dict><key>type</key><string>standard</string><key>parameters</key><array><integer>65535</integer><integer>49</integer><integer>1048576</integer></array></dict></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 "<dict><key>enabled</key><false/><key>value</key><dict><key>type</key><string>standard</string><key>parameters</key><array><integer>65535</integer><integer>49</integer><integer>1572864</integer></array></dict></dict>"
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
