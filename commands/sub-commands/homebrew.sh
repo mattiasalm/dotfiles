@@ -20,11 +20,12 @@ if is-available brew; then
 	fi
 else
 	color-print blue "Installing Homebrew..."
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 	if ! is-available brew; then
-		echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"' >> ~/.zprofile
-		eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+		echo >> ~/.zprofile
+		echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> ~/.zprofile
+		eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 	fi
 
 	color-print green "Homebrew installed successfully"

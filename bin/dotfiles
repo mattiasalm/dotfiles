@@ -26,8 +26,12 @@ run_command() {
 
 	if [ -f $DOTFILES_PATH/commands/$_COMMAND.sh ]; then
 		color-print blue "Running $_COMMAND..."
-		. $DOTFILES_PATH/commands/$_COMMAND.sh
-		color-print green "$_COMMAND completed successfully"
+		if . $DOTFILES_PATH/commands/$_COMMAND.sh; then
+			color-print green "$_COMMAND completed successfully"
+		else
+			color-print red "Error: $_COMMAND failed"
+			return 1
+		fi
 	else
 		color-print red "Error: Command \"$_COMMAND\" not found"
 		show_help
@@ -51,12 +55,17 @@ run_all_commands() {
 	if (( _SELECTED_OPTION == 1 )); then
 		ask-sudo
 
+		_HAS_FAILED=0
 		for _COMMAND in $_COMMANDS; do
 			echo
-			run_command $_COMMAND
+			run_command $_COMMAND || _HAS_FAILED=1
 		done
-		
+
 		echo
+		if (( _HAS_FAILED )); then
+			color-print red "Error: Complete setup finished with failures"
+			return 1
+		fi
 		color-print green "Complete setup finished successfully"
 	else
 		color-print yellow "Setup cancelled by user"
